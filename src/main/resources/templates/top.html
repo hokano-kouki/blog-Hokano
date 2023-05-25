@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/css/top.css}">
+	<title>Document</title>
+</head>
+
+<body>
+	<header>
+
+		<ul>
+			<li><a th:href="@{/top}">Home</a></li>
+			<li><a th:href="@{/blog-register}">Blog Register</a></li>
+			<li><a th:href="@{/logout}">Logout</a></li>
+		</ul>
+
+	</header>
+
+	<main>
+		<section class="first-view-section">
+
+		</section>
+
+		<section class="blog-list-section">
+
+			<!--<h2 th:if="${blogList.size() == 0}">記事が投稿されていません</h2>-->
+
+			<div class="blog-list-flex">
+
+				<!--<article class="blog-topic-article" th:each="blog:${blogList}">
+
+					<a href="" class="bulog-colum">
+
+						<img src="" alt="">
+						<div class="colum__box">
+							<p th:text="${blog.blogTitle}"></p>
+						</div>
+					</a>
+				</article>-->
+				<article class="blog-topic-article" th:each="blog:${blogList}">
+					<a th:href="@{/user/blog/edit/{blogId}(blogId=${blog.blogId})}" class="blog-colum">
+						<div class="blog-colum-category">
+							<p th:text=" ${blog.blogTitle}"></p>
+						</div>
+						<!--<img th:src="@{/blog-img/{items}(items=${blog.blogImage})}">
+						<div class="colum__box">
+							<p th:text="${#temporals.format(blog.registerDate, 'yyyy/MM/dd')}"></p>
+							<p th:text=" ${blog.blogTitle}"></p>
+						</div>-->
+					</a>
+				</article>
+			</div>
+		</section>
+	</main>
+
+	<footer id="footer">
+		<p class="copyright">Copyright &copy; 2022 Learner All Rights Reserved.</p>
+	</footer>
+
+
+</body>
+
+</html>
