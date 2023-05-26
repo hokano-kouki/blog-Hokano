@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/blog-edit.css}">
+    <title>blog-edit</title>
+</head>
+<body>
+        
+    <header>
+        <ul>
+            <li><a th:href="@{/top}">Home</a></li>
+            <li><a th:href="@{/blog/register}">Blog Register</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </header>
+
+    <main>
+
+        <form method="post" enctype="multipart/form-data" th:action="@{/blog/update}">
+
+            <div class="title">
+                <input type="text" name="blogTitle" placeholder="タイトル" th:value="${blogList.blogTitle}" required>
+            </div>
+            
+            <div class="image">
+                <input type="file" name="blogImage" required>
+            </div>
+            
+            <div class="text">
+                <textarea  name="blogText" placeholder="ここに記入してください" th:text="${blogList.blogText}" required></textarea>
+            </div>
+              <input type="hidden" name="blogId" th:value="${blogList.blogId}" required>
+            <button>更  新</button>
+
+        </form>
+    </main>
+
+    <footer>
+        <p class="copyright">Copyright &copy; 2022 Learner All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
