@@ -33,7 +33,7 @@ public class AccountService {
 		return accountDao.findAll();
 	}
 	
-	//accountIdからデータを取得することをしていく
+	//accountIdからデータを取得する
 	public AccountEntity selectByAccountId(Long accountId) {
 		return accountDao.findByAccountId(accountId);
 	}

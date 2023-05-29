@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,7 +20,7 @@ import test.ex.service.BlogService;
 
 
 @Controller
-public class BlogRegisterController {
+public class BlogEditController {
 	@Autowired
 	private BlogService blogService;
 	
@@ -27,18 +28,21 @@ public class BlogRegisterController {
 	HttpSession session;
 	
 	
-	@GetMapping("/blog/register")
-	public String getRegisterPage() {
-		return "blog-register.html";
+	@GetMapping("/blog/edit/{blogId}")
+	public String getRegisterPage(@PathVariable Long blogId,Model model) {
+		//blogIdから編集を行いたいブログ情報を取得（HTML内で使用）
+		model.addAttribute("blogList",blogService.selectByBlogId(blogId));
+		return "blog-edit.html";
 	}
 	
 	
 
 	//投稿
-	@PostMapping("/blog/register")
+	@PostMapping("/blog/update")
 	public String register(@RequestParam String blogTitle,
 						   @RequestParam String blogText,
 						   @RequestParam("blogImage") MultipartFile blogImage,
+						   @RequestParam Long blogId,
 						   Model model) {
 		
 		//ログイン中のユーザ情報を取得
@@ -66,7 +70,7 @@ public class BlogRegisterController {
 		
 		
 		//保存処理
-		blogService.insert(blogTitle,blogText,fileName,account_id);
+		blogService.update(blogTitle,blogText,fileName,account_id,blogId);
 		return "redirect:/top";
 		
 	}

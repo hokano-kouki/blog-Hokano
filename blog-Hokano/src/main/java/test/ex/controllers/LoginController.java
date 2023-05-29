@@ -14,7 +14,7 @@ import test.ex.service.AccountService;
 public class LoginController {
 
 	@Autowired 
-	private AccountService adminService;
+	private AccountService accountService;
 	
 	@Autowired
 	HttpSession session;
@@ -28,13 +28,13 @@ public class LoginController {
 	@PostMapping("/login")
 	public String login(@RequestParam String email,@RequestParam String password){
 		//accountServiceクラスのfindByEmailAndPasswordメソッドを使用して、該当するユーザー情報を取得する。
-		AccountEntity accountEntity = adminService.selectByEmailAndPassword(email, password);
+		AccountEntity accountEntity = accountService.selectByEmailAndPassword(email, password);
 		if(accountEntity == null) {
 			return "login.html";
 		}else {
 			//accountEntityの内容をsessionに保存する
 			session.setAttribute("admin", accountEntity);
-			return "top.html";
+			return "redirect:/top";
 		}
 		
 	}

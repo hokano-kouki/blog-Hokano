@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/blog-view.css}">
+    <title>Document</title>
+</head>
+<body>
+        
+    <header>
+        <ul>
+            <li><a th:href="@{/top}">Home</a></li>
+			<li><a th:href="@{/blog/register}">Blog Register</a></li>
+			<li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </header>
+
+    <main>
+		<div class="blog">
+		    <h2 th:text="${blogList.blogTitle}"></h2>
+	        <p th:text="${blogList.blogText}"></p>
+		</div>
+
+		<h1>コメント：</h1>
+		<div class="comments">
+			<div class="comment" th:each="comment:${commentList}">
+			    <h5 th:text="${comment.userName}"></h5>
+		        <p th:text="${comment.commentText}"></p>
+			</div>	
+		</div>			
+		
+		
+		
+       <form method="post" th:action="@{'/blog/view/' +${blogList.blogId}}">
+			
+            <div class="commentForm">
+                <textarea  name="commentText" placeholder="コメント" required></textarea>
+            </div>
+           
+            <button>投  稿</button>
+
+        </form>
+
+    </main>
+
+    <footer>
+        <p class="copyright">Copyright &copy; 2022 Learner All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

@@ -16,7 +16,7 @@ public class LogoutController {
 	//セッションの情報を無効
     public String Logout() {
 		session.invalidate();
-		return "login.html";
+		return "redirect:/login";
 	}
 
 }

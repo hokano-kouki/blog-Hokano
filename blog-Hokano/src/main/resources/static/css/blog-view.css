@@ -8,12 +8,12 @@
 body{
     text-align: center;
     margin:0 auto;
-    background-image: url(../img/p0495_l.jpg);
+    background-image: url(/../img/p0495_l.jpg);
 }
 
 header{
     height: 200px;
-    background-image: url(../img/p0325_m.jpg);
+    background-image: url(/../img/p0325_m.jpg);
 }
 
 ul{
@@ -34,12 +34,12 @@ main{
     background-color: rgb(255, 244, 237);
     width: 80%;
     margin:0 auto;
-    height: 900px;
 }
 
 footer{
     margin-bottom:0;
     background-image: url(../../img/p0325_m.jpg);
+    height: 100px;
 }
 
 a{
@@ -49,7 +49,7 @@ a{
 input{
     width: 60%;
     height: 50px;
-    margin:20px;
+    margin:50px;
     font-size: 20px;
     font-family: 'Kosugi', sans-serif;
 }
@@ -57,7 +57,7 @@ input{
 textarea{
     resize: none;
     width: 60%;
-    height: 600px;
+    height: 200px;
     font-size: 20px;
     font-family: 'Kosugi', sans-serif;
 }
@@ -72,4 +72,43 @@ button{
     background-color: rgb(145, 38, 38);
     color:white;
 
+}
+
+
+.comments{
+    
+    margin:20px auto;
+    width:70%;
+    text-align:left;
+    background-color:white;
+}
+
+.blog{
+    margin:0 auto;
+    width:70%;
+    text-align:left;
+    background-color:white;
+}
+
+h1{
+    width:70%;
+    margin:20px auto;
+    text-align:left;
+}
+
+.comment{
+    padding: 10px;
+}
+
+h2{
+    font-size:50px;
+    padding:50px 20px;
+}
+
+p{
+    font-size:20px;
+    padding-left:20px;
+}
+h5{
+    font-size:25px
 }

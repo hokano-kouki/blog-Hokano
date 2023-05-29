@@ -19,10 +19,14 @@
 
     <main>
 
-        <form method="post" th:actioon="@{/blog-register}">
+        <form method="post" enctype="multipart/form-data" th:actioon="@{/blog-register}">
 
             <div class="title">
                 <input type="text" name="blogTitle" placeholder="タイトル" required>
+            </div>
+            
+            <div class="image">
+                <input type="file" name="blogImage" placeholder="サムネイル" required>
             </div>
 
 

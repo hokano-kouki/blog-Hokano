@@ -40,6 +40,7 @@ main{
 footer{
     margin-bottom:0;
     background-image: url(../../img/p0325_m.jpg);
+    height: 100px;
 }
 
 a{
@@ -49,7 +50,7 @@ a{
 input{
     width: 60%;
     height: 50px;
-    margin:50px;
+    margin:20px;
     font-size: 20px;
     font-family: 'Kosugi', sans-serif;
 }
@@ -63,7 +64,7 @@ textarea{
 }
 
 button{
-    margin: 35px 0;
+    margin: 20px 0;
     width: 400px;
     height: 60px;
     border-radius: 10px;

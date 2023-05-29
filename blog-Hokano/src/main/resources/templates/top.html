@@ -1,50 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/top.css}">
-    <title>Document</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/css/top.css}">
+	<title>Document</title>
 </head>
+
 <body>
-    <header>
+	<header>
 
-        <ul>
-            <li><a th:href="@{#}">Home</a></li>
-            <li><a th:href="@{/blog-register}">Blog Register</a></li>
-            <li><a th:href="@{/logout}">Logout</a></li>
-        </ul>
-        
-    </header>
+		<ul>
+			<li><a th:href="@{/top}">Home</a></li>
+			<li><a th:href="@{/blog/register}">Blog Register</a></li>
+			<li><a th:href="@{/logout}">Logout</a></li>
+		</ul>
 
-    <main>
-        <section class="first-view-section">
+	</header>
 
-        </section>
-        
-        <section class="blog-list-section">
-            <h2>Blog List</h2>
-            <div class="blog-list-flex">
-                <article class="blog-topic-article">
-                    <a href="" class="bulog-colum"></a>
-                    <div class="blog-colum-category">
-                        <p></p>
-                    </div>
-                    <img src="" alt="">
-                    <div class="colum__box">
-                        <p></p>
-                        <p></p>
-                    </div>
-                </article>
-            </div>
-        </section>
-    </main>
+	<main th:class="${blogList.size() > 3} ? 'main' : 'test1'">
+		<section class="first-view-section">
 
-    <footer id="footer">
-        <p class="copyright">Copyright &copy; 2022 Learner All Rights Reserved.</p>
-    </footer>
+		</section>
+
+		<section class="blog-list-section">
+
+			<!--
+				<h2 th:if="${blogList.size() == 0}">記事が投稿されていません</h2>-->
+
+			
+			<div class="blog-list-flex">
+
+				<article class="blog-topic-article" th:each="blog:${blogList}">
+					
+					<a th:if="${blog.accountId == accountId}" th:href="@{'/blog/edit/' +${blog.blogId}}" class="blog-colum">
+						<img class="mainImage" th:src="@{'/images/' + ${blog.blogImage}}">
+					</a>
+					
+					<a th:if="${blog.accountId != accountId}" th:href="@{'/blog/view/' +${blog.blogId}}" class="blog-colum">
+						<img class="mainImage" th:src="@{'/images/' + ${blog.blogImage}}">
+					</a>
+						<div class="colum__box">
+							<p th:text=" ${blog.blogTitle}"></p>
+							
+							<form th:action="@{/top}"method="post">
+								<input type="hidden" name="blogId" th:value="${blog.blogId}">
+								<button th:if="${blog.accountId == accountId}">
+									<img class="trash" th:src="@{/img/965_tr_h.png}">
+								</button>
+							</form>
+							
+						</div>
+				</article>
+			</div>
+		</section>
+	</main>
+
+	<footer id="footer" 
+		<p class="copyright">Copyright &copy; 2022 Learner All Rights Reserved.</p>
+	</footer>
 
 
 </body>
+
 </html>

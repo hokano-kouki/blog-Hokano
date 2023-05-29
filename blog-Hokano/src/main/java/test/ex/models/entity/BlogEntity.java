@@ -22,10 +22,10 @@ public class BlogEntity {
 	@Column(name="blog_text")
 	private String blogText;
 	
-	@Column(name="comment")
-	private String comment;
+	@Column(name="blog_img")
+	private String blogImage;
 	
-	@Column(name="accout_id")
+	@Column(name="account_id")
 	private Long accountId;
 
 	//コンストラクタ
@@ -33,11 +33,11 @@ public class BlogEntity {
 
 	}
 	
-	public BlogEntity(Long blogId, String blogTitle, String blogText, String comment, Long accountId) {
+	public BlogEntity(Long blogId, String blogTitle, String blogText, String blogImage, Long accountId) {
 		this.blogId = blogId;
 		this.blogTitle = blogTitle;
 		this.blogText = blogText;
-		this.comment = comment;
+		this.blogImage = blogImage;
 		this.accountId = accountId;
 	}
 	
@@ -47,11 +47,16 @@ public class BlogEntity {
 	}
 
 
-	public BlogEntity(String blogTitle, String blogText, Long accountId) {
+
+
+	public BlogEntity(String blogTitle, String blogText, String blogImage, Long accountId) {
 		this.blogTitle = blogTitle;
 		this.blogText = blogText;
+		this.blogImage = blogImage;
 		this.accountId = accountId;
 	}
+
+
 
 	//getter & setter
 	public Long getBlogId() {
@@ -78,12 +83,14 @@ public class BlogEntity {
 		this.blogText = blogText;
 	}
 
-	public String getComment() {
-		return comment;
+
+
+	public String getBlogImage() {
+		return blogImage;
 	}
 
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setBlogImage(String blogImage) {
+		this.blogImage = blogImage;
 	}
 
 	public Long getAccountId() {
