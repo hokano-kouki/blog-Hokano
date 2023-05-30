@@ -12,21 +12,25 @@ import test.ex.service.AccountService;
 public class RegisterController {
 	@Autowired
 	private AccountService accountService;
-	
-	//新規登録画面の表示/register
+
+	// 新規登録画面の表示------------------------------------------
 	@GetMapping("/register")
 	public String getRegisterPage() {
 		return "register.html";
 	}
-	//保存処理/register return　リダイレクトして登録画面を表示させる
-	
+
+	// 保存処理------------------------------------------------------
+	/**
+	 * @param username 登録したいユーザー名
+	 * @param password 登録したいパスワード
+	 * @param email    登録したいE-mail
+	 * @return
+	 */
 	@PostMapping("/register")
-	public String register(@RequestParam String username,
-			               @RequestParam String password,
-			               @RequestParam String email) {
-		//保存処理
-		accountService.insert(username,password,email);
+	public String register(@RequestParam String username, @RequestParam String password, @RequestParam String email) {
+		// 保存処理
+		accountService.insert(username, password, email);
 		return "login.html";
-		
+
 	}
 }

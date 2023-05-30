@@ -11,38 +11,38 @@ import jakarta.servlet.http.HttpSession;
 import test.ex.models.entity.AccountEntity;
 import test.ex.service.BlogService;
 
-
-
 @Controller
 public class TopController {
 	@Autowired
 	private BlogService blogService;
-	
 
-	
 	@Autowired
 	HttpSession session;
-	
-	
 
+	// トップ画面の表示及びログインユーザー・すべてのブログ記事の情報を取得------------------------------------
 	@GetMapping("/top")
 	public String getList(Model model) {
-		//ログインしているユーザーの情報を取得
+		// ログインしているユーザーの情報を取得
 		AccountEntity userList = (AccountEntity) session.getAttribute("admin");
 		Long account_id = userList.getAccountId();
-		
-		//登録されているすべての記事の情報を取得（HTML内で使用）
-		model.addAttribute("blogList",blogService.selectFindAll());
-		//ログインユーザーのアカウントIDを取得（HTML内で使用）
-		model.addAttribute("accountId",account_id);
+
+		// 登録されているすべての記事の情報を取得（HTML内で使用）
+		model.addAttribute("blogList", blogService.selectFindAll());
+		// ログインユーザーのアカウントIDを取得（HTML内で使用）
+		model.addAttribute("accountId", account_id);
 		return "top.html";
 	}
-	
+
+	// 削除処理----------------------------------------------------------------------------
+	/**
+	 * @param blogId 削除したい記事のID
+	 * @return
+	 */
 	@PostMapping("/top")
 	public String delete(@RequestParam Long blogId) {
-		//削除処理
+		// 削除処理
 		blogService.delete(blogId);
 		return "redirect:/top";
 	}
-	
+
 }

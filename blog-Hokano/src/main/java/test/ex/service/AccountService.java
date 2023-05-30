@@ -12,40 +12,40 @@ import test.ex.models.entity.AccountEntity;
 public class AccountService {
 	@Autowired
 	private AccountDao accountDao;
-	
-	//登録内容を保存する処理
-	public void insert(String userName,String password,String email) {
-		accountDao.save(new AccountEntity(userName,password,email));
+
+	// 登録内容を保存する処理--------------------------------------------
+	public void insert(String userName, String password, String email) {
+		accountDao.save(new AccountEntity(userName, password, email));
 	}
-	
-	//ログイン処理
-	public AccountEntity selectByEmailAndPassword(String email,String password) {
+
+	// ログイン処理---------------------------------------------------------------------
+	public AccountEntity selectByEmailAndPassword(String email, String password) {
 		List<AccountEntity> accountList = accountDao.findByEmailAndPassword(email, password);
-		if(accountList.isEmpty()) {
+		if (accountList.isEmpty()) {
 			return null;
-		}else {
+		} else {
 			return accountList.get(0);
 		}
 	}
-	
-	//一覧を取得する処理
-	public List<AccountEntity> selectFindAll(){
+
+	// 一覧を取得する処理-----------------------------------------------------------
+	public List<AccountEntity> selectFindAll() {
 		return accountDao.findAll();
 	}
-	
-	//accountIdからデータを取得する
+
+	// accountIdからデータを取得する------------------------------------------------
 	public AccountEntity selectByAccountId(Long accountId) {
 		return accountDao.findByAccountId(accountId);
 	}
-	
-	//内容をupdate
-	public void update(String userName,String email,String password) {
-		accountDao.save(new AccountEntity(userName,email,password));
+
+	// 内容をupdate-----------------------------------------------------------
+	public void update(String userName, String email, String password) {
+		accountDao.save(new AccountEntity(userName, email, password));
 	}
-	
-	//削除処理
-    public void delete(Long accountId) {
-    	accountDao.deleteById(accountId);
-    }
+
+	// 削除処理--------------------------------------------------------------
+	public void delete(Long accountId) {
+		accountDao.deleteById(accountId);
+	}
 
 }

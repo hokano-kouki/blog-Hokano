@@ -17,62 +17,66 @@ import jakarta.servlet.http.HttpSession;
 import test.ex.models.entity.AccountEntity;
 import test.ex.service.BlogService;
 
-
-
 @Controller
 public class BlogEditController {
 	@Autowired
 	private BlogService blogService;
-	
+
 	@Autowired
 	HttpSession session;
-	
-	
+
+	// エディット画面の表示及び編集を行う記事情報の取得--------------------------------------------------------------
+	/**
+	 * @param blogId 更新を行うブログ記事のID
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/blog/edit/{blogId}")
-	public String getRegisterPage(@PathVariable Long blogId,Model model) {
-		//blogIdから編集を行いたいブログ情報を取得（HTML内で使用）
-		model.addAttribute("blogList",blogService.selectByBlogId(blogId));
+	public String getBlogEditPage(@PathVariable Long blogId, Model model) {
+		// blogIdから編集を行いたいブログ情報を取得（HTML内で使用）
+		model.addAttribute("blogList", blogService.selectByBlogId(blogId));
 		return "blog-edit.html";
 	}
-	
-	
 
-	//投稿
+	// ブログ記事の更新---------------------------------------------------------------------
+	/**
+	 * @param blogTitle 更新後のブログタイトル
+	 * @param blogText  更新後の内容
+	 * @param blogImage 更新後の画像
+	 * @param blogId    更新を行うブログ記事のID
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/blog/update")
-	public String register(@RequestParam String blogTitle,
-						   @RequestParam String blogText,
-						   @RequestParam("blogImage") MultipartFile blogImage,
-						   @RequestParam Long blogId,
-						   Model model) {
-		
-		//ログイン中のユーザ情報を取得
+	public String blogEdit(@RequestParam String blogTitle, @RequestParam String blogText,
+			@RequestParam("blogImage") MultipartFile blogImage, @RequestParam Long blogId, Model model) {
+
+		// ログイン中のユーザ情報を取得
 		AccountEntity userList = (AccountEntity) session.getAttribute("admin");
 		Long account_id = userList.getAccountId();
-		
-		//画像ファイル名を取得
+
+		// 画像ファイル名を取得
 		String fileName = blogImage.getOriginalFilename();
-		
+
 		try {
-			//保存先の指定
-			File blogFile = new File("./images/"+fileName);
-			//バイナリデータの取得
+			// 保存先の指定
+			File blogFile = new File("./images/" + fileName);
+			// バイナリデータの取得
 			byte[] bytes = blogImage.getBytes();
-			//画像を保存するためのバッファを用意
+			// 画像を保存するためのバッファを用意
 			BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(blogFile));
-			//ファイルの書き出し
+			// ファイルの書き出し
 			out.write(bytes);
-			//バッファを閉じることで書き出しを正常終了
+			// バッファを閉じることで書き出しを正常終了
 			out.close();
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		//保存処理
-		blogService.update(blogTitle,blogText,fileName,account_id,blogId);
+
+		// 保存処理
+		blogService.update(blogTitle, blogText, fileName, account_id, blogId);
 		return "redirect:/top";
-		
+
 	}
-	
+
 }

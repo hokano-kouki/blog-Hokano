@@ -59,6 +59,12 @@ p{
     font-size: 30px;
 }
 
+.error-msg{
+	font-family: 'M PLUS Rounded 1c', sans-serif;
+    color:red
+}
+
+
 #register{
     color: blue;
 }

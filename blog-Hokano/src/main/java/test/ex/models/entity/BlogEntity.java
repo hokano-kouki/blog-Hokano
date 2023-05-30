@@ -8,31 +8,31 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="blog")
+@Table(name = "blog")
 public class BlogEntity {
-	
+
 	@Id
-	@Column(name="blog_id")
+	@Column(name = "blog_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long blogId;
-	
-	@Column(name="blog_title")
+
+	@Column(name = "blog_title")
 	private String blogTitle;
-	
-	@Column(name="blog_text")
+
+	@Column(name = "blog_text")
 	private String blogText;
-	
-	@Column(name="blog_img")
+
+	@Column(name = "blog_img")
 	private String blogImage;
-	
-	@Column(name="account_id")
+
+	@Column(name = "account_id")
 	private Long accountId;
 
-	//コンストラクタ
+	// コンストラクタ
 	public BlogEntity() {
 
 	}
-	
+
 	public BlogEntity(Long blogId, String blogTitle, String blogText, String blogImage, Long accountId) {
 		this.blogId = blogId;
 		this.blogTitle = blogTitle;
@@ -40,14 +40,11 @@ public class BlogEntity {
 		this.blogImage = blogImage;
 		this.accountId = accountId;
 	}
-	
+
 	public BlogEntity(String blogTitle, String blogText) {
 		this.blogTitle = blogTitle;
 		this.blogText = blogText;
 	}
-
-
-
 
 	public BlogEntity(String blogTitle, String blogText, String blogImage, Long accountId) {
 		this.blogTitle = blogTitle;
@@ -56,9 +53,7 @@ public class BlogEntity {
 		this.accountId = accountId;
 	}
 
-
-
-	//getter & setter
+	// getter & setter
 	public Long getBlogId() {
 		return blogId;
 	}
@@ -83,8 +78,6 @@ public class BlogEntity {
 		this.blogText = blogText;
 	}
 
-
-
 	public String getBlogImage() {
 		return blogImage;
 	}
@@ -100,8 +93,5 @@ public class BlogEntity {
 	public void setAccountId(Long accountId) {
 		this.accountId = accountId;
 	}
-
-	
-	
 
 }

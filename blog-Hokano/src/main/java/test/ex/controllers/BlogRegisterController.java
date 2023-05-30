@@ -16,59 +16,59 @@ import jakarta.servlet.http.HttpSession;
 import test.ex.models.entity.AccountEntity;
 import test.ex.service.BlogService;
 
-
-
 @Controller
 public class BlogRegisterController {
 	@Autowired
 	private BlogService blogService;
-	
+
 	@Autowired
 	HttpSession session;
-	
-	
+
+	//ブログ作成画面の表示--------------------------------------------
 	@GetMapping("/blog/register")
-	public String getRegisterPage() {
+	public String getBlogRegisterPage() {
 		return "blog-register.html";
 	}
-	
-	
 
-	//投稿
+	// ブログ記事の投稿---------------------------------------------------------------------------
+	/**
+	 * @param blogTitle 投稿する記事のタイトル
+	 * @param blogText　　投稿する記事の内容
+	 * @param blogImage　投稿する記事の画像
+	 * @param model　　
+	 * @return
+	 */
 	@PostMapping("/blog/register")
-	public String register(@RequestParam String blogTitle,
-						   @RequestParam String blogText,
-						   @RequestParam("blogImage") MultipartFile blogImage,
-						   Model model) {
-		
-		//ログイン中のユーザ情報を取得
+	public String blogRegister(@RequestParam String blogTitle,
+							   @RequestParam String blogText,
+							   @RequestParam("blogImage") MultipartFile blogImage, Model model) {
+
+		// ログイン中のユーザ情報を取得
 		AccountEntity userList = (AccountEntity) session.getAttribute("admin");
 		Long account_id = userList.getAccountId();
-		
-		//画像ファイル名を取得
+
+		// 画像ファイル名を取得
 		String fileName = blogImage.getOriginalFilename();
-		
+
 		try {
-			//保存先の指定
-			File blogFile = new File("./images/"+fileName);
-			//バイナリデータの取得
+			// 保存先の指定
+			File blogFile = new File("./images/" + fileName);
+			// バイナリデータの取得
 			byte[] bytes = blogImage.getBytes();
-			//画像を保存するためのバッファを用意
+			// 画像を保存するためのバッファを用意
 			BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(blogFile));
-			//ファイルの書き出し
+			// ファイルの書き出し
 			out.write(bytes);
-			//バッファを閉じることで書き出しを正常終了
+			// バッファを閉じることで書き出しを正常終了
 			out.close();
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		//保存処理
-		blogService.insert(blogTitle,blogText,fileName,account_id);
+
+		// 保存処理
+		blogService.insert(blogTitle, blogText, fileName, account_id);
 		return "redirect:/top";
-		
+
 	}
-	
+
 }

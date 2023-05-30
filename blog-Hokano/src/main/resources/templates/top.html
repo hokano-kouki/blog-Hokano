@@ -27,39 +27,41 @@
 
 		<section class="blog-list-section">
 
-			<!--
-				<h2 th:if="${blogList.size() == 0}">記事が投稿されていません</h2>-->
 
-			
+
 			<div class="blog-list-flex">
 
 				<article class="blog-topic-article" th:each="blog:${blogList}">
-					
-					<a th:if="${blog.accountId == accountId}" th:href="@{'/blog/edit/' +${blog.blogId}}" class="blog-colum">
+
+					<!--ログインしているユーザが作成した記事の場合編集画面へ遷移-->
+					<a th:if="${blog.accountId == accountId}" th:href="@{'/blog/edit/' +${blog.blogId}}"
+						class="blog-colum">
 						<img class="mainImage" th:src="@{'/images/' + ${blog.blogImage}}">
 					</a>
-					
-					<a th:if="${blog.accountId != accountId}" th:href="@{'/blog/view/' +${blog.blogId}}" class="blog-colum">
+
+					<!--ログインしているユーザが作成した記事ではない場合閲覧画面へ遷移-->
+					<a th:if="${blog.accountId != accountId}" th:href="@{'/blog/view/' +${blog.blogId}}"
+						class="blog-colum">
 						<img class="mainImage" th:src="@{'/images/' + ${blog.blogImage}}">
 					</a>
-						<div class="colum__box">
-							<p th:text=" ${blog.blogTitle}"></p>
-							
-							<form th:action="@{/top}"method="post">
-								<input type="hidden" name="blogId" th:value="${blog.blogId}">
-								<button th:if="${blog.accountId == accountId}">
-									<img class="trash" th:src="@{/img/965_tr_h.png}">
-								</button>
-							</form>
-							
-						</div>
+					<div class="colum__box">
+						<p th:text=" ${blog.blogTitle}"></p>
+
+						<!--ログインしているユーザが作成した記事にのみ削除ボタンを表示-->
+						<form th:action="@{/top}" method="post">
+							<input type="hidden" name="blogId" th:value="${blog.blogId}">
+							<button th:if="${blog.accountId == accountId}">
+								<img class="trash" th:src="@{/img/965_tr_h.png}">
+							</button>
+						</form>
+
+					</div>
 				</article>
 			</div>
 		</section>
 	</main>
 
-	<footer id="footer" 
-		<p class="copyright">Copyright &copy; 2022 Learner All Rights Reserved.</p>
+	<footer id="footer" <p class="copy-right">Copyright &copy; 2022 Learner All Rights Reserved.</p>
 	</footer>
 
 
