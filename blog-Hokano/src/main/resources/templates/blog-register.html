@@ -21,14 +21,14 @@
 
 	<main>
 
-		<form method="post" enctype="multipart/form-data" th:actioon="@{/blog-register}">
+		<form method="post" enctype="multipart/form-data" th:action="@{/blog/register}">
 
 			<div class="title">
 				<input type="text" name="blogTitle" placeholder="タイトル" required>
 			</div>
 
 			<div class="image">
-				<input type="file" name="blogImage" placeholder="サムネイル" required>
+				<input type="file" name="blogImage" accept="image/png,image/jpeg,image/gif" required>
 			</div>
 
 
@@ -42,7 +42,7 @@
 	</main>
 
 	<footer>
-		<p class="copyr-ight">Copyright &copy; 2022 Learner All Rights Reserved.</p>
+		<p class="copyright">Copyright &copy; 2023 Learner All Rights Reserved.</p>
 	</footer>
 
 </body>

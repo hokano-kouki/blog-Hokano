@@ -38,6 +38,11 @@ public class AccountService {
 		return accountDao.findByAccountId(accountId);
 	}
 
+	// emailを取得---------------------------------------------------------------
+	public AccountEntity selectByEmail(String email) {
+		return accountDao.findByemail(email);
+	}
+
 	// 内容をupdate-----------------------------------------------------------
 	public void update(String userName, String email, String password) {
 		accountDao.save(new AccountEntity(userName, email, password));
