@@ -18,3 +18,7 @@
 
 ## 使用言語
 HTML,CSS,java
+
+## 参照：設計書
+
+https://docs.google.com/spreadsheets/d/1o2R0Gx-IsWNblHSDC-286pftfSlPHYUQ/edit?usp=sharing&ouid=117085994184780826094&rtpof=true&sd=true
